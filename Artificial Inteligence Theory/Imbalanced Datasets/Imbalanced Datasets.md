@@ -1,4 +1,3 @@
->Tags:  #LocalMinimum, #Metrics, #Overfit
 
 # Introduction
 
@@ -14,24 +13,17 @@ Statistic algorithms (and also the human brain) flourish when the data they are 
 
 **... we can't achieve our potential.**
 
-![](../media/imbalanced_datasets/introduction.jpeg)
+![](media/imbalanced_datasets/introduction.jpeg)
 
-Edgy examples aside, for most real world problems it is challenging (costly and time-consuming) to gather an equal number of samples for all scenarios (think detecting Frauds or Rare Diseases). 
+# Balancing Methods
 
-# Balancing methods
+Edgy examples aside, for most real world problems it's challenging (costly and time-consuming) to gather an equal number of samples for all scenarios (think detecting Frauds or Rare Diseases). 
 
 However, in order to bypass this limitation, we can imply one of several balancing methods such as:
 
-* **[Over-sampling](Over-sampling.md)** - copying or generating more samples for minor classes
-	* *downsides: may cause overfitting*
-* **[Under-sampling](Under-sampling)** - removing data from major classes
-	* downsides: may push algorithm towards a local minimum
-* **[Combined-sampling](Combined-sampling.md)** - trying to get the best of both worlds
-
-# Remarks
-
-## * Accuracy is not a representative metric
-Accuracy is not a good metric for datasets with skewed classes. For example, when classifying whether someone is suffering from a rare diesese or not, only predicting `negative` will produce a over 90% accuracy.
-
-## * Precission, recall and F1 are good metrics
+* **[[Over-sampling]]** - copying or generating more samples for minor classes
+	* *downsides: may cause the algorithm to #Overfit 
+* **[[Under-sampling]]** - removing data from major classes
+	* *downsides: may push algorithm towards a #LocalMinimum*
+* **[[Combined-sampling]]** - combining both over- and under-sampling
 

@@ -1,14 +1,13 @@
-> Tags: #Overfit 
 
 # Downsides
-When duplicating samples from the minority classes, the ML algorithm will tend to "learn" them by heart in order to achieve a low error rate, thus leading to overfit.
+When duplicating samples from the minority classes, the ML algorithm will tend to "learn" them by heart in order to achieve a low error rate, thus leading to #Overfit.
 
-# Methods
+# Approaches
 
 ![img|420x420](https://imbalanced-learn.org/stable/_images/sphx_glr_plot_comparison_over_sampling_004.png)
 > Image taken from: [imbalanced-learn.org](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html#sphx-glr-auto-examples-over-sampling-plot-comparison-over-sampling-py)
 
-## 1. Naive random over-sampling 
+## 1. Naive Random Over-Sampling 
 Randomly sample with replacement (duplicate) elements from the minor class (the classes with lesser samples) until all classes have the same number of elements.
 
 ## 2. SMOTE - Synthetic Minority Oversampling Technique
