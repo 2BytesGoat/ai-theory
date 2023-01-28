@@ -1,29 +1,31 @@
 
 # Introduction
 
-Statistic algorithms (and also the human brain) flourish when the data they are exposed to is unbiased and of high quality. If the data is balanced, it is easier to estimate how far an algorithm is from the truth, and it makes it easier for the algorithm to generalize and identify correlations between input and target data.
+Statistic algorithms (and also the human brain) have an easier time determining patterns and rules when the data they are exposed to is unbiased and of high quality. 
 
-**When we have a bias...**
+Let's say we were to build an algorithm which tells you whether in an image there's a dog or a cat. We may consider that **your data is balanced if you have the same number of samples for all classes**. That means we have the same number of images with dogs as images of cats. 
 
-> *Consider that, from the day you are born, the only dog you ever saw or read about was a Puddle. Then one day, a friend asks you to guess how his new dog (a German Sheppard) looks like, and you start describing him as a puddle.*
+If we had an imbalanced dataset, let's say 10 images with dogs and 1000 images with cats, it would be easier for the algorithm to classify that whatever image we give it as cat, rather than it figuring out the differences.
 
-**... or an incomplete picture of the problem ...**
-
->*Different people can look at the same thing from different angles, and still not be able to get to the global minimum, the same as in [The blind men and the elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant#:~:text=The%20parable%20of%20the%20blind,the%20side%20or%20the%20tusk.).*
-
-**... we can't achieve our potential.**
+>[!example]
+>Consider, you and your friend are playing a game of coin tossing. After a few tosses, you are amazed to see that 7 out of 8 tosses, the coin lands on heads. 
+> 
+> Seeing this, what face of the coin would you bet on next time?
 
 ![](media/imbalanced_datasets/introduction.jpeg)
+> *When we have a bias or an incomplete picture of the problem, we can't achieve our true potential.* - **Philosopher Goat** (image generated with [Stable Diffusion](https://en.wikipedia.org/wiki/Stable_Diffusion))
 
 # Balancing Methods
 
-Edgy examples aside, for most real world problems it's challenging (costly and time-consuming) to gather an equal number of samples for all scenarios (think detecting Frauds or Rare Diseases). 
+For most real world problems, it's challenging (costly and time-consuming) to gather an equal number of samples from all scenarios (think of problems like Detecting Frauds or Rare Diseases). 
 
-However, in order to bypass this limitation, we can imply one of several balancing methods such as:
+> [!warning]
+> If the dataset is changed (more data is collected, from the same or different data source) the balancing method should be reevaluated.
 
-* **[[Over-sampling]]** - copying or generating more samples for minor classes
-	* *downsides: may cause the algorithm to #Overfit 
-* **[[Under-sampling]]** - removing data from major classes
-	* *downsides: may push algorithm towards a #LocalMinimum*
-* **[[Combined-sampling]]** - combining both over- and under-sampling
+However, there are several methods that we can imply in order to make the best out of our data:
+* **[[1. Oversampling]]** - ways of copying or generating more samples for minor classes
+* **[[2. Undersampling]]** - ways of removing data from major classes
+* **[[3. Combined Sampling]]** - ways of combining both over- and under-sampling
+* **[[4. Inner Balancing Samplers]]** - training robust [[decission trees]] by using #bootstraping
 
+As a general rule of thumb, we may want to experiment with one of each approach in order to determine what is best for our algorithm.
