@@ -1,6 +1,13 @@
-# Components
+Algebra can be a bit daunting at first, especially to folks that haven't trained their math muscle in a long time. However, there are a platitude of math libraries that do the heavy lifting for us. Our task is to understand which formulas to use, and why they behave like they do.
 
-## Vectors
+My recommendation for this chapter, is to shuffle around the notions and not worry too much about fully grasping them from one shot. This information will make a lot more sense once you find an application for it, so just look around, make yourself familiar with the terms for later on.
+
+![](media/linear_algebra/introduction.jpeg | 420)
+Goat Writing Math Formulas on a Blackboard (image generated with [Stable Diffusion](https://en.wikipedia.org/wiki/Stable_Diffusion))
+
+# 1. Components
+
+## 1.1. Vectors
 Are 1-Dimensional arrays of numbers, arranged in order.
 
 ```python
@@ -9,7 +16,7 @@ print(x[0]) # this is the first element of the vector
 >> 22
 ```
 
-## Matrices 
+## 1.2. Matrices 
 Are 2-Dimensional arrays of numbers. Imagine stacking several vectors on top of each other.
 
 ```python
@@ -22,7 +29,7 @@ print(x[1][1]) # if we print the element from row 1, column 1
 >[!tip] Did you know that
 > **Black and white images** are actually 2D matrices with values ranging from 0-255. Each value of the image is a pixel, and the number of pixels is given by the width times height of the image.
 
-## Tensors 
+## 1.3. Tensors 
 Are n-Dimensional arrays of numbers. Imagine a vector is a toothpick, and that you can stack them both on top of each other and side-wise. I struggle to imagine tensors of a dimension higher than 3D, and the best way to wrap my head around them is with a real-world example.
 
 ```python
@@ -35,14 +42,23 @@ print(x[0][1][1]) # if we print the element at row 0, column 1 and depth 1
 >[!tip] Did you know that
 > **Color images** are actually 3D matrices (or tensors) with values ranging from 0-255. You get a colored image by stacking Red, Green and Blue images on top of each other ([see example](https://upload.wikimedia.org/wikipedia/commons/5/56/RGB_channels_separation.png)). The dimensions are image height, image width and color channel.
 
-## Identity matrix
+## 1.4. The Identity Matrix
 
+It is a type of 2D matrix, in which all elements are zero, except the ones of the main diagonal.
 
-# Operations
+```python
+identity = [
+			[1, 0, 0],
+			[0, 1, 0],
+			[0, 0, 1]
+		   ]
+```
 
-## Tier 1 - Operations
+# 2. Operations
 
-Addition can be done on arrays of the same shape, or between an array and a vector which share a dimension. Matrices and vectors also support addition, subtraction, multiplication and division with scalars.
+## 2.1. Tier 1 Operations
+
+Matrices and vectors also support addition, subtraction, multiplication and division with scalars. Addition can be done on arrays of the same shape, or between an array and a vector which share a dimension. 
 
 ```python
 import numpy as np
@@ -74,9 +90,9 @@ print(x + z)
 	  	  [ 5, 7, 9]])
 ```
 
-## Tier 2 - Operations
+## 2.2. Tier 2 Operations
 
-## Transpose
+### 2.2.1. Transpose
 
 > "The transpose of a matrix is the mirror image of the matrix across a diagonal line, called the main diagonal." - **Deep Leaning** by *Ian Goodfellow et al.*
 
@@ -94,7 +110,9 @@ print(x_transposed)
 
 There are a few terms that you'll encounter when people start multiplying matrices and vectors, and you'll need to know the difference, or it's going to get messy.
 
-## Element-wise product (Hadmard product)
+### 2.2.2. Element-wise Product (Hadmard product)
+
+The element-wise product is used in classical computer vision to create filters (blur, edge-detection).
 
 ```python
 import numpy as np
@@ -114,7 +132,9 @@ rez[1][1] = x[1][0] * y[1][1]
 '''
 ```
 
-## Dot product
+### 2.2.3. Dot Product
+
+The dot product is used in Deep Learning models in order to parallelize computations, rather than having to use less efficient methods such as for loops. You'll see more about that in the Deep Learning chapter.
 
 ```python
 import numpy as np
@@ -147,15 +167,66 @@ rez[0][1] = x[0][0] * z[0][1] + x[0][1] * z[1][1] + x[0][2] * z[2][1]
 
 Some of us may not have heard this words since one of our past lives. However, it's important to know they exist, so we know what to look them up later.
 
-### Distributivity 
+### 2.3.4. Bonus - Product Properties
+
+#### Distributivity 
 Matrix multiplication is distributive.
 `x * (y + z) = x * y + x * z`
 
-### Associativity
+#### Associativity
 Matrix multiplication is associative.
 `x * (y * z) = (x * y) * z`
 
-### Commutativity
+#### Commutativity
 Matrix multiplication is ***not*** commutative, however the dot product between two vectors is.
 `np.dot(x.T, y) == np.dot(y.T, x) `
 
+## 2.3. Tier 3 Operations
+
+### 2.3.1. Matrix inverse 
+
+The matrix inverse of X is the matrix which has the following property ... $$X^{-1} \odot X = I_n$$... where the symbol I represents the identity matrix.
+
+```python
+import numpy as np
+from numpy.linalg import inv
+
+x = np.array([[1, 2], [3, 4]])
+x_inverse = inv(x)
+
+print(x_inverse)
+>>[[-2.   1. ]
+   [ 1.5 -0.5]]
+```
+
+### 2.3.2. Norms
+
+Norms are used to calculate the length of a vector in Euclidean space, and for the formula for those that are not light-hearted: $$||x||_p = (\sum|x_i|^p)^{1/p}$$
+```python
+import numpy as np
+from numpy.linalg import norm
+
+x = np.array([1, 2, 3, 4])
+# by default numpy sets p to be 2
+# this is also called the L2 norm
+x_norm = norm(x) 
+
+print(x_norm)
+>> 5.477
+
+# it returns the same value 
+# no matter the sape of the array
+y = np.array([[1, 2], [3, 4]])
+y_norm = norm(y)
+
+print(y_norm)
+>> 5.477
+```
+
+The most commonly used norms are L1 and L2 norm. We may choose to use one in favor of the other, depending on the values within the array. If the values are closer to 0, we will choose the L1 norm.
+
+>[!tip] Did you know that
+> Another wacky name for the L2 norm is the Frobenius norm.
+
+# References
+1. **Introduction to linear algebra** - [Khan Academy](https://www.khanacademy.org/math/linear-algebra)

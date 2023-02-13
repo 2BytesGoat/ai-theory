@@ -12,7 +12,7 @@ If we had an imbalanced dataset, let's say 10 images with dogs and 1000 images w
 > 
 > Seeing this, what face of the coin would you bet on next time?
 
-![](media/imbalanced_datasets/introduction.jpeg)
+![](media/imbalanced_datasets/introduction.jpeg | 420)
 > *When we have a bias or an incomplete picture of the problem, we can't achieve our true potential.* - **Philosopher Goat** (image generated with [Stable Diffusion](https://en.wikipedia.org/wiki/Stable_Diffusion))
 
 # Balancing Methods
